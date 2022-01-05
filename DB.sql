@@ -1,12 +1,12 @@
--- Create a new database called 'lang_scholl'
-CREATE DATABASE lang_scholl
+-- Create a new database called 'lang_school'
+CREATE DATABASE lang_school
 
 --classes tables
 CREATE TABLE class
 (
     classes_id integer PRIMARY KEY,
     namee VARCHAR(100),
-    start_datee date,
+    start_datee date, 
     end_date date,
     price money,
     teacher_id integer REFERENCES teacher(teacher_id),
@@ -15,16 +15,17 @@ CREATE TABLE class
 
 CREATE TABLE class_weekday
 (
-    class_id integer PRIMARY KEY REFERENCES class(classes_id),
-    weekday_id integer PRIMARY KEY REFERENCES weekdayy(weekdayy_id),
+    class_id integer REFERENCES class(classes_id),
+    weekday_id integer REFERENCES weekdayy(weekdayy_id),
     hourss varchar(50)
+    PRIMARY KEY (class_id, weekday_id)
 );
 
 CREATE TABLE weekdayy --pesquisar weekday na documentacao
 (
     weekdayy_id integer PRIMARY KEY,
     namee varchar(100)
-);
+); 
 
 CREATE TABLE class_student
 (
