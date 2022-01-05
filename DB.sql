@@ -4,40 +4,40 @@ CREATE DATABASE lang_scholl
 --classes tables
 CREATE TABLE class
 (
-    id integer PRIMARY KEY,
+    classes_id integer PRIMARY KEY,
     namee VARCHAR(100),
     start_datee date,
     end_date date,
     price money,
-    teacher_id integer,
-    course_id integer
+    teacher_id integer REFERENCES teacher(teacher_id),
+    course_id integer REFERENCES course(course_id)
 );
 
 CREATE TABLE class_weekday
 (
-    class_id integer,
-    weekday_id integer,
+    class_id integer PRIMARY KEY REFERENCES class(classes_id),
+    weekday_id integer PRIMARY KEY REFERENCES weekdayy(weekdayy_id),
     hourss varchar(50)
 );
 
 CREATE TABLE weekdayy --pesquisar weekday na documentacao
 (
-    id integer PRIMARY KEY,
+    weekdayy_id integer PRIMARY KEY,
     namee varchar(100)
 );
 
 CREATE TABLE class_student
 (
-    id integer PRIMARY KEY,
-    class_id integer,
-    student_id integer
+    class_student_id integer PRIMARY KEY,
+    class_id integer REFERENCES class(classes_id),
+    student_id integer REFERENCES student(student_id),
 );
 
 --teachers tables
 
 CREATE TABLE teacher
 (
-    id integer PRIMARY KEY,
+    teacher_id integer PRIMARY KEY,
     descriptionn varchar(300),
     photo image,
     first_name varchar(50),
@@ -48,8 +48,8 @@ CREATE TABLE teacher
 
 CREATE TABLE teacher_account
 (
-    id integer PRIMARY KEY,
-    teacher_id integer,
+    teacher_account_id integer PRIMARY KEY,
+    teacher_id integer REFERENCES teacher(teacher_id),
     is_active bit,
     loginn varchar(100),
     passwordd varchar(100)
@@ -59,7 +59,7 @@ CREATE TABLE teacher_account
 
 CREATE TABLE student
 (
-    id integer PRIMARY KEY,
+    student_id integer PRIMARY KEY,
     date_birth date,
     statee varchar(150),
     city varchar(100),
@@ -74,7 +74,7 @@ CREATE TABLE student
 CREATE TABLE student_account
 (
     id integer PRIMARY KEY,
-    student_id integer,
+    student_id integer REFERENCES student(student_id),
     is_active bit,
     loginn varchar(100),
     passwordd varchar(100)
@@ -84,52 +84,53 @@ CREATE TABLE student_account
 
 CREATE TABLE course
 (
-    id integer PRIMARY KEY,
+    course_id integer PRIMARY KEY,
     lessons integer,
     descriptionn varchar(300),
     term varchar(100),
-    language_id integer,
-    level_id integer,
-    category_id integer
+    language_id integer REFERENCES languagee(language_id),
+    level_id integer REFERENCES levell(level_id),
+    category_id integer REFERENCES category(category_id)
 );
 
 CREATE TABLE levell
 (
-    id integer PRIMARY KEY,
+    level_id integer PRIMARY KEY,
     sign char(2),
     namee varchar(100)   --pesquisar name -- aqui é o nivel de proficiencia
 );
 
 CREATE TABLE languagee
 (
-    id integer PRIMARY KEY,
+    language_id integer PRIMARY KEY,
     namee varchar(100)
 );
 
 CREATE TABLE category
 (
-    id integer PRIMARY KEY,
+    category_id integer PRIMARY KEY,
     namee varchar(20) --criança, adolescente, adulto, etc
 );
+
 --payment tables
 CREATE TABLE payment
 (
     id  integer PRIMARY KEY,
     payment_date datetime,
     amount  money,
-    payment_method_id integer,
+    payment_method_id integer REFERENCES payment_method_id(pay_method_id),
     statuss VARCHAR(50),
-    student_id integer,
-    class_id integer
+    student_id integer REFERENCES student(student_id),
+    class_id integer REFERENCES class(classes_id)
 );
 
 CREATE TABLE payment_method_id
 (
-    id integer PRIMARY KEY,
+    pay_method_id integer PRIMARY KEY,
     namee varchar(100)
 );
 
---staff tables
+--staff tables 
 
 CREATE TABLE staff
 (
@@ -143,7 +144,7 @@ CREATE TABLE staff
 
 CREATE TABLE staff_account
 (
-    id integer PRIMARY KEY,
+    staff_account_id integer PRIMARY KEY,
     is_active bit,
     loginn varchar(100),
     passwordd varchar(100),
