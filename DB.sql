@@ -5,7 +5,7 @@ CREATE DATABASE lang_school;
 CREATE TABLE class
 (
     classes_id int PRIMARY KEY,
-    namee VARCHAR(100),
+    full_name VARCHAR(100),
     start_datee date, 
     end_date date,
     price money,
@@ -24,7 +24,7 @@ CREATE TABLE class_weekday
 CREATE TABLE frequency 
 (
     frequency_id int PRIMARY KEY,
-    namee varchar(100)
+    full_name varchar(100)
 ); 
 
 CREATE TABLE class_student
@@ -98,19 +98,19 @@ CREATE TABLE grade
 (
     grade_id int PRIMARY KEY,
     sign char(2),
-    namee varchar(100)   --pesquisar name -- aqui é o nivel de proficiencia
+    full_name varchar(100)  -- aqui é o nivel de proficiencia
 );
 
 CREATE TABLE languagee
 (
     language_id int PRIMARY KEY,
-    namee varchar(100)
+    full_name varchar(100)
 );
 
 CREATE TABLE category
 (
     category_id int PRIMARY KEY,
-    namee varchar(20) --criança, adolescente, adulto, etc
+    life_stage varchar(20) --criança, adolescente, adulto, etc
 );
 
 --payment tables
@@ -128,7 +128,7 @@ CREATE TABLE payment
 CREATE TABLE payment_method_id
 (
     pay_method_id int PRIMARY KEY,
-    namee varchar(100)
+    full_name varchar(100)
 );
 
 --staff tables 
