@@ -1,5 +1,13 @@
 -- Create a new database called 'lang_school'
-CREATE DATABASE lang_school;
+CREATE DATABASE lang_school
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
 
 --classes tables
 CREATE TABLE class
